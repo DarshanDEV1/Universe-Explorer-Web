@@ -79,7 +79,7 @@ function init() {
 
 function createSun() {
     const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+    const material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('textures/sun.jpg') });
     const sun = new THREE.Mesh(geometry, material);
     sun.userData = { name: 'Sun', info: 'The Sun is the star at the center of the Solar System...' };
     scene.add(sun);
