@@ -3,6 +3,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/cont
 
 let scene, camera, renderer, controls, raycaster, mouse;
 let planets = [];
+let zoomFactor = 1;
 
 init();
 animate();
@@ -25,8 +26,7 @@ function init() {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
-    controls.enableZoom = true;
-    controls.enablePan = true;
+    controls.enableZoom = true; // Enable default zoom
 
     // Raycaster and Mouse
     raycaster = new THREE.Raycaster();
@@ -58,6 +58,8 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('click', onClick, false);
+    window.addEventListener('touchmove', onTouchMove, false);
+    window.addEventListener('touchend', onClick, false);
 
     document.getElementById('zoomIn').addEventListener('click', zoomIn);
     document.getElementById('zoomOut').addEventListener('click', zoomOut);
@@ -69,6 +71,10 @@ function init() {
     joystick.addEventListener('pointermove', onJoystickMove);
     joystick.addEventListener('pointerup', onJoystickUp);
     joystick.addEventListener('pointercancel', onJoystickUp);
+
+    const handle = document.createElement('div');
+    handle.id = 'joystick-handle';
+    joystick.appendChild(handle);
 }
 
 function createSun() {
@@ -115,19 +121,23 @@ function onWindowResize() {
 }
 
 function onMouseMove(event) {
-    // Calculate mouse position in normalized device coordinates
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
+function onTouchMove(event) {
+    if (event.touches.length > 0) {
+        mouse.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+}
+
 function onClick(event) {
-    // Raycasting
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
 
     if (intersects.length > 0) {
         const obj = intersects[0].object;
-        // Check if clicked on a planet or external object
         if (planets.includes(obj)) {
             showInfoPanel(obj.userData.name, obj.userData.info);
         }
@@ -137,11 +147,7 @@ function onClick(event) {
 function showInfoPanel(name, info) {
     const infoPanel = document.getElementById('info-panel');
     const infoContent = document.getElementById('info-content');
-
-    infoContent.innerHTML = `
-        <h2>${name}</h2>
-        <p>${info}</p>
-    `;
+    infoContent.innerHTML = `<h2>${name}</h2><p>${info}</p>`;
     infoPanel.style.display = 'block';
 }
 
@@ -150,11 +156,11 @@ function closePanel() {
 }
 
 function zoomIn() {
-    controls.dollyIn(1.2);
+    camera.position.setLength(camera.position.length() * 0.8);
 }
 
 function zoomOut() {
-    controls.dollyOut(1.2);
+    camera.position.setLength(camera.position.length() * 1.2);
 }
 
 function onJoystickDown(event) {
@@ -164,19 +170,31 @@ function onJoystickDown(event) {
 function onJoystickMove(event) {
     const joystick = document.getElementById('joystick');
     const rect = joystick.getBoundingClientRect();
-    const centerX = rect.left + rect.width    / 2;
+    const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const deltaX = event.clientX - centerX;
     const deltaY = event.clientY - centerY;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    if (distance > rect.width / 2) {
-        const angle = Math.atan2(deltaY, deltaX);
-        controls.rotateLeft(angle);
-    }
+    // Normalize deltaX and deltaY
+    const maxDistance = rect.width / 2;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const normalizedX = deltaX / maxDistance;
+    const normalizedY = deltaY / maxDistance;
+
+    // Apply joystick movement to camera controls
+    controls.rotateLeft(normalizedX * 0.05);
+    controls.rotateUp(normalizedY * 0.05);
+
+    const handle = document.getElementById('joystick-handle');
+    handle.style.left = `${Math.min(Math.max(deltaX + centerX - rect.left, 0), rect.width - handle.offsetWidth)}px`;
+    handle.style.top = `${Math.min(Math.max(deltaY + centerY - rect.top, 0), rect.height - handle.offsetHeight)}px`;
 }
 
 function onJoystickUp(event) {
+    const joystick = document.getElementById('joystick');
+    const handle = document.getElementById('joystick-handle');
+    handle.style.left = '50%';
+    handle.style.top = '50%';
     event.target.releasePointerCapture(event.pointerId);
 }
 
@@ -187,8 +205,8 @@ function animate() {
     controls.update();
 
     // Animate planets
+    const time = Date.now() * 0.001;
     planets.forEach(planet => {
-        const time = Date.now() * 0.001;
         const distance = planet.userData.distance;
         const speed = planet.userData.speed;
 
@@ -199,4 +217,3 @@ function animate() {
     // Render scene
     renderer.render(scene, camera);
 }
-

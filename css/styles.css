@@ -65,4 +65,15 @@ canvas {
     background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     touch-action: none;
+    position: relative;
+}
+#joystick-handle {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar System Viewer</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* body { margin: 0; overflow: hidden; }
+        #info-panel { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px; border-radius: 5px; display: none; max-height: 80%; overflow-y: auto; }
+        #info-panel h2 { margin-top: 0; } */
+        #zoomIn, #zoomOut { position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px; border-radius: 5px; cursor: pointer; }
+        #zoomOut { top: 50px; }
+        #joystick { position: absolute; bottom: 10px; left: 10px; width: 100px; height: 100px; background: rgba(0, 0, 0, 0.7); border-radius: 50%; }
+        #joystick-handle { position: absolute; width: 20px; height: 20px; background: white; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    </style>
 </head>
 <body>
     <div id="info">Click on objects to learn more.</div>
-    <div id="ui">
+    <!-- <div id="ui">
         <button id="zoomIn" class="btn">Zoom In</button>
         <button id="zoomOut" class="btn">Zoom Out</button>
-    </div>
+    </div> -->
     <div id="info-panel" class="info-panel">
         <div id="info-content" class="info-content"></div>
         <button id="close-panel" class="btn">Close</button>
@@ -19,6 +28,14 @@
     <div id="joystick-container">
         <div id="joystick"></div>
     </div>
+
+    <div id="info-panel">
+        <div id="info-content"></div>
+        <button id="close-panel">Close</button>
+    </div>
+    <button id="zoomIn">Zoom In</button>
+    <button id="zoomOut">Zoom Out</button>
+    <!-- <div id="joystick"></div> -->
     <script type="module" src="js/app.js"></script>
 </body>
 </html>
