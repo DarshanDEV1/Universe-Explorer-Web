@@ -167,11 +167,11 @@ function onTouchMove(event) {
 }
 
 function zoomIn() {
-    camera.position.z -= 5;
+    controls.dollyIn(1.2);
 }
 
 function zoomOut() {
-    camera.position.z += 5;
+    controls.dollyOut(1.2);
 }
 
 function animate() {
