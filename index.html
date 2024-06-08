@@ -3,54 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universe Viewer</title>
-    <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; }
-        .label {
-            color: white;
-            font-family: 'Arial';
-            font-size: 14px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        #info {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            color: white;
-            font-family: Arial, sans-serif;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1;
-        }
-        #ui {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 1;
-        }
-        .btn {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-        }
-    </style>
+    <title>Solar System Viewer</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="info">Zoom in/out to explore the universe. Click on objects to learn more.</div>
+    <div id="info">Click on objects to learn more.</div>
     <div id="ui">
         <button id="zoomIn" class="btn">Zoom In</button>
         <button id="zoomOut" class="btn">Zoom Out</button>
+    </div>
+    <div id="info-panel" class="info-panel">
+        <div id="info-content" class="info-content"></div>
+        <button id="close-panel" class="btn">Close</button>
+    </div>
+    <div id="joystick-container">
+        <div id="joystick"></div>
     </div>
     <script type="module" src="js/app.js"></script>
 </body>
