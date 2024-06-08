@@ -139,14 +139,14 @@ function createSun() {
 
 function createPlanets() {
     const planetData = [
-        { name: 'Mercury', size: 1, distance: 10, texture: 'textures/mercury.jpg', info: 'Mercury is the closest planet to the Sun...', speed: 0.04 },
-        { name: 'Venus', size: 1.5, distance: 15, texture: 'textures/venus.jpg', info: 'Venus is the second planet from the Sun...', speed: 0.03 },
-        { name: 'Earth', size: 2, distance: 20, texture: 'textures/earth.jpg', info: 'Earth is the third planet from the Sun...', speed: 0.02 },
-        { name: 'Mars', size: 1.2, distance: 25, texture: 'textures/mars.jpg', info: 'Mars is the fourth planet from the Sun...', speed: 0.017 },
-        { name: 'Jupiter', size: 4, distance: 30, texture: 'textures/jupiter.jpg', info: 'Jupiter is the fifth planet from the Sun...', speed: 0.01 },
-        { name: 'Saturn', size: 3.5, distance: 35, texture: 'textures/saturn.jpg', info: 'Saturn is the sixth planet from the Sun...', speed: 0.009 },
-        { name: 'Uranus', size: 2.5, distance: 40, texture: 'textures/uranus.jpg', info: 'Uranus is the seventh planet from the Sun...', speed: 0.005 },
-        { name: 'Neptune', size: 2.5, distance: 45, texture: 'textures/neptune.jpg', info: 'Neptune is the eighth planet from the Sun...', speed: 0.004 },
+        { name: 'Mercury', size: 1, distance: 10, texture: 'textures/mercury.jpg', info: 'Mercury is the closest planet to the Sun...\nMercury is the smallest planet in our solar system. It’s just a little bigger than Earth’s moon. It is the closest planet to the sun, but it’s actually not the hottest. Mercury doesn’t have any moons or rings.', speed: 0.04 },
+        { name: 'Venus', size: 1.5, distance: 15, texture: 'textures/venus.jpg', info: 'Venus is the second planet from the Sun...\nVenus is the second planet from the sun and our closest planetary neighbor. Similar in structure and size to Earth, Venus spins slowly in the opposite direction from most planets. Its thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system.', speed: 0.03 },
+        { name: 'Earth', size: 2, distance: 20, texture: 'textures/earth.jpg', info: 'Earth is the third planet from the Sun...\nEarth, our home planet, is the only planet in our solar system known to harbor life. All of the things we need to survive are provided under a thin layer of atmosphere that separates us from the uninhabitable void of space.', speed: 0.02 },
+        { name: 'Mars', size: 1.2, distance: 25, texture: 'textures/mars.jpg', info: 'Mars is the fourth planet from the Sun...\nMars is a dusty, cold, desert world with a very thin atmosphere. There is strong evidence Mars was—billions of years ago—wetter and warmer, with a thicker atmosphere.', speed: 0.017 },
+        { name: 'Jupiter', size: 4, distance: 30, texture: 'textures/jupiter.jpg', info: 'Jupiter is the fifth planet from the Sun...\nJupiter is more than twice as massive than the other planets of our solar system combined. The giant planet’s Great Red Spot is a centuries-old storm bigger than Earth.', speed: 0.01 },
+        { name: 'Saturn', size: 3.5, distance: 35, texture: 'textures/saturn.jpg', info: 'Saturn is the sixth planet from the Sun...\nSaturn is the sixth planet from the Sun and the second-largest in our solar system. Adorned with thousands of beautiful ringlets, Saturn is unique among the planets.', speed: 0.009 },
+        { name: 'Uranus', size: 2.5, distance: 40, texture: 'textures/uranus.jpg', info: 'Uranus is the seventh planet from the Sun...\nUranus is the only planet whose equator is nearly at a right angle to its orbit. A collision with an Earth-sized object may explain Uranus’ unique tilt. Nearly a twin in size to Neptune, Uranus has more methane in its mainly hydrogen and helium atmosphere than Jupiter or Saturn.', speed: 0.005 },
+        { name: 'Neptune', size: 2.5, distance: 45, texture: 'textures/neptune.jpg', info: 'Neptune is the eighth planet from the Sun...\nDark, cold and whipped by supersonic winds, Neptune is the eighth and most distant major planet orbiting our Sun. It is the only planet not visible to the naked eye and the first predicted by mathematics before its discovery.', speed: 0.004 },
     ];
 
     planetData.forEach(data => {
