@@ -80,6 +80,58 @@ function init() {
 function createSun() {
     const geometry = new THREE.SphereGeometry(5, 32, 32);
     const material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('textures/sun.jpg') });
+    // const material = createCustomMaterial();
+
+    // const sunShaderCode = `
+    //   // Copy and paste the shader code here from the provided document
+    //   // Vertex shader
+    //     #vertex shader
+    //     // begin vertex shader
+    //     precision highp float;
+
+    //     attribute vec3 position;
+    //     attribute vec2 uv;
+
+    //     uniform mat4 modelViewMatrix;
+    //     uniform mat4 projectionMatrix;
+
+    //     varying vec2 vUv;
+
+    //     void main() {
+    //         vUv = uv;
+    //         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    //     }
+    //     // end vertex shader
+
+    //     // Fragment shader
+    //     #fragment shader
+    //     // begin fragment shader
+    //     precision highp float;
+
+    //     uniform float iTime;
+    //     uniform vec2 iResolution;
+    //     uniform vec2 iMouse;
+
+    //     varying vec2 vUv;
+
+    //     void main() {
+    //         vec2 uv = vUv;
+    //         vec3 col = 0.5 + 0.5 * cos(iTime + uv.xyx + vec3(0, 2, 4));
+
+    //         gl_FragColor = vec4(col, 1.0);
+    //     }
+    //     // end fragment shader
+    // `;
+    // const material = new THREE.RawShaderMaterial({
+    //     vertexShader: sunShaderCode.match(/^((\/\/.*)?\r?\n|\/\*[\s\S]*?\*\/|[^\/])*?#\s*?vertex\s*?shader.*?\/\/\s*begin\s*?vertex\s*?shader([\s\S]*?)\/\/\s*end\s*?vertex\s*?shader/m)[3],
+    //     fragmentShader: sunShaderCode.match(/^((\/\/.*)?\r?\n|\/\*[\s\S]*?\*\/|[^\/])*?#\s*?fragment\s*?shader.*?\/\/\s*begin\s*?fragment\s*?shader([\s\S]*?)\/\/\s*end\s*?fragment\s*?shader/m)[3],
+    //     uniforms: {
+    //         iTime: { value: 0 },
+    //         iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+    //         iMouse: { value: new THREE.Vector2(0, 0) }
+    //     }
+    // });
+
     const sun = new THREE.Mesh(geometry, material);
     sun.userData = { name: 'Sun', info: 'The Sun is the star at the center of the Solar System...' };
     scene.add(sun);
